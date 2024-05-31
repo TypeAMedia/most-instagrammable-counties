@@ -10,6 +10,20 @@ body {
   color: var(--dark);
 }
 
+@font-face {
+  font-family: "GT Pressura";
+  font-weight: 400;
+  src: url(./GT-PRESSURA-REGULAR.TTF) format("truetype");
+}
+
+@font-face {
+  font-weight: 700;
+  font-family: "GT Pressura-bold";
+  src: url(./GT-Pressura-Bold.ttf) format("truetype");
+}
+
+
+
 *:focus,
 *:focus-within {
   box-shadow: none !important;
@@ -45,9 +59,8 @@ body {
 }
 
 .banner {
-  background-image: url('/images/banner.png');
-  height: 280px;
-  padding: 50px;
+  background-image: url('/images/banner-mobile.png');
+  height: 334px;
   text-align: center;
   color: #fff;
   display: flex;
@@ -55,7 +68,8 @@ body {
 }
 
 .title {
-  font-family: GT Pressura;
+  font-family: "GT Pressura";
+  margin: 40px auto;
   font-size: 52px;
   font-weight: 700;
   line-height: 48px;
@@ -63,17 +77,20 @@ body {
 }
 
 .description {
-  font-family: GT Pressura;
-  font-size: 20px;
+  max-width: 300px;
+  margin: 40px auto;
+  font-family: "GT Pressura";
+  font-size: 16px;
   font-weight: 400;
   line-height: 24px;
   text-align: center;
-  margin-top: 15px;
+
 }
 
 .main-container {
   padding: 0px;
   max-width: 918px;
+  background-color: #EEF1EF
 }
 
 .hero-image {
@@ -130,8 +147,8 @@ body {
 
 .btn-zooms {
   position: absolute;
-  right: -10px;
-  bottom: 30px;
+  right: 30px;
+  bottom: 50px;
 }
 
 .btn-rect {
@@ -167,7 +184,7 @@ body {
 /* inner content */
 
 .inner-content {
-  width: 600px;
+  max-width: 600px;
   margin: 0 auto;
 }
 
@@ -223,7 +240,9 @@ body {
   font-size: 32px;
   font-weight: 700;
   line-height: 40px;
-  color: #324C3D
+  color: #324C3D;
+  text-align: left;
+  margin: 0 20px;
 }
 
 
@@ -231,8 +250,20 @@ body {
 .dropdown {
   padding: 0 15px;
   margin-top: 20px;
+  color: #324C3D;
+  font-family: GT Pressura;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 26px;
+  text-align: left;
+  max-width: 700px;
 }
 
+.choice-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
 .choices__item--disabled {
   display: none;
@@ -437,10 +468,85 @@ body {
   font-weight: 700
 }
 
+
+.table-div {
+  padding: 20px;
+}
+
 .table-wrap {
-  height: 300px;
-  overflow-y: auto;
-  padding: 16px;
+  margin: 0 auto;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 16px 16px 10px 16px;
+  overflow-x: auto;
+  white-space: nowrap;
+  background-color: #ffffff;
+  width: 100%;
+  overflow-x: auto;
+}
+
+#table {
+  display: flex;
+  min-width: 500px;
+}
+
+.table-header {
+  border-right: 1px solid #EEF1EF
+}
+
+.table-label {
+  border-bottom: 1px solid #EEF1EF
+}
+
+.table-icon {
+  width: 20px;
+  height: 30px;
+}
+
+.Town_ {
+  border-right: none !important
+}
+
+.table-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  font-family: "Open Sans", sans-serif;
+  width: 100%;
+  cursor: pointer;
+}
+
+.table-cell {
+  font-family: "GT Pressura";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 40px;
+  text-align: left;
+
+}
+
+.table-label {
+  font-family: "GT Pressura";
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 40px;
+  text-align: center;
+  color: #324C3D
+}
+
+.table-container {
+  display: flex;
+  align-items: center;
+}
+
+.Rank {
+  font-family: "GT Pressura";
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 40px;
+  text-align: left;
+  color: #324C3D
 }
 
 .table th {
@@ -510,6 +616,59 @@ body {
   font-weight: bold;
 }
 
+.tooltip-title {
+  border-bottom: 1px solid #EEF1EF;
+  padding-bottom: 5px;
+}
+
+.tooltip-box {
+  background-color: #ffffff;
+  padding: 5px;
+  font-family: "GT Pressura";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  color: #324C3D
+}
+
+.tooltip-span {
+  font-family: "GT Pressura";
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 40px;
+  text-align: left;
+  color: #324C3D;
+}
+
+.tooltip-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  flex: 1 1 40%;
+  gap: 20px;
+}
+
+.tooltip-line-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: "GT Pressura";
+  font-size: 16px;
+  font-weight: 700;
+  text-align: left;
+
+}
+
+.tooltip-value {
+  text-align: end
+}
+
+.tooltip-rank {
+  margin-top: 20px;
+}
+
 .FC-rank {
   color: #848484;
   font-size: 16px;
@@ -542,8 +701,42 @@ body {
     transform: translateY(18px);
   }
 
+
   .title {
-    margin: 10px 0px;
+    font-family: GT Pressura;
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 48px;
+    text-align: center;
+  }
+
+  .banner {
+    background-image: url('/images/banner.png');
+    height: 280px;
+    padding: 50px;
+    text-align: center;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .description {
+    max-width: 100%;
+    margin: 0 auto;
+    font-family: "GT Pressura";
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: center;
+  }
+
+  .table-title {
+    font-family: 'GT Pressura';
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 40px;
+    color: #324C3D
   }
 
   .modal-dialog {
@@ -552,5 +745,11 @@ body {
 
   .dropdown {
     padding: 0 10%;
+  }
+
+  .btn-zooms {
+    position: absolute;
+    right: -20px;
+    bottom: 30px;
   }
 }

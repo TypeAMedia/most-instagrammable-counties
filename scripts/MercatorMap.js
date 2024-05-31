@@ -17,7 +17,8 @@ class MercatorMap {
 					strokeColor: '#ffffff',
 					fillColor: '#49D69D',
 				},
-				featureStrokeWidth: 0,
+				mapColors: [],
+				featureStrokeWidth: 1,
 				basemap: {},
 				layer: [],
 				zoomExtent: [1, 8],
@@ -31,6 +32,9 @@ class MercatorMap {
 		)
 		this.main()
 	}
+
+
+
 
 	main(resize) {
 		const { attrs } = this
@@ -64,7 +68,6 @@ class MercatorMap {
 			})
 			.attr('width', attrs.width)
 			.attr('height', attrs.height)
-			.on('click', () => this.highlightPin(() => false))
 
 		//Add chart group
 		this.chart = this.svg
@@ -86,7 +89,7 @@ class MercatorMap {
 
 		this.drawFeatures()
 
-		this.drawLayer(resize)
+		// this.drawLayer(resize)
 
 		const zoom = d3
 			.zoom()
@@ -97,11 +100,6 @@ class MercatorMap {
 				const scale = Math.max(1, e.transform.k)
 
 				this.featuresDom.attr('stroke-width', attrs.featureStrokeWidth / scale)
-
-				this.pinsDom
-					.select('.pin-content')
-					.attr('transform', `scale(${1 / scale})`)
-				this.currentTransform = e.transform
 
 				tippy.hideAll()
 
@@ -126,110 +124,57 @@ class MercatorMap {
 			selector: 'map-container',
 		})
 
-		this.featuresDom = mapContainer
-			.patternify({
-				tag: 'path',
-				selector: 'feature',
-				data: this.geoFeatures.features,
-			})
+		const setColors = d3.scaleQuantile()
+			.domain(d3.extent(attrs.data.map((d) => d['Total Instagram hashtags'])))
+			.range(attrs.mapColors);
+
+		this.featuresDom = mapContainer.patternify({
+			tag: 'path',
+			selector: 'feature',
+			data: this.geoFeatures.features,
+		})
 			.attr('stroke', attrs.colors.strokeColor)
 			.attr('stroke-width', attrs.featureStrokeWidth / this.currentTransform.k)
-			.attr('fill', attrs.colors.fillColor)
+			.attr('fill', (d) => {
+				const foundCounty = attrs.data.find((county) => d.properties?.NAME_2 === county.County)?.['Total Instagram hashtags']
+				if (foundCounty) {
+					return setColors(foundCounty)
+				} else {
+					return '#DA4D4580'
+				}
+			})
+			.style('cursor', 'pointer')
 			.attr('d', this.path)
+			.attr('data-name', function (d) {
+				return d.properties?.NAME_2
+			}).each(function (d) {
+				const foundCounty = attrs.data.find((county) => d.properties?.NAME_2 === county.County)
+				initTooltip(this, attrs.getTooltipHtml(foundCounty))
+			})
 	}
 
-	getPin(d) {
-		return `
-      <g transform="translate(-13, -40) scale(0.8)" transform-origin="13 40">
-        <g class="pin-content" transform-origin="13 40" transform="scale(${1 / this.currentTransform.k})">
-          <path d="M18.5173 25.7125L13.3717 40.8706L8.22614 25.7125C4.97537 24.3565 2.39047 21.7714 1.03444 18.5208C-1.8089 11.703 1.41073 3.87461 8.22386 1.03316C15.0394 -1.80795 22.8678 1.41168 25.7092 8.22485C28.5525 15.0403 25.3305 22.8687 18.5173 25.7125Z" fill="#101921"/>
-          <text class="rank-text" x="13" y="17" text-anchor="middle">${d.Rank}</text>
-        </g>
-      </g>
-    `
+	highlightTooltip(county) {
+		const { attrs } = this
+		const specificPathNode = d3.select(`path[data-name='${county}']`).node();
+		const foundCounty = attrs.data.find((d) => d.County === county)
+		console.log(foundCounty)
+		console.log(specificPathNode)
+		if (specificPathNode) {
+			// Initialize the Tippy.js tooltip on the specific path node
+			tippy(specificPathNode, {
+				content: attrs.getTooltipHtml(foundCounty),
+				allowHTML: true,
+				arrow: true,
+				theme: 'light',
+				animation: 'scale',
+				placement: 'top',
+				trigger: 'manual'
+			}).show();
+		} else {
+			console.error(`Path node for county '${county}' not found.`);
+		}
 	}
 
-	drawLayer(resize) {
-		const {
-			attrs: { layer, onPinClick, getTooltipHtml },
-		} = this
-
-		const layerGroup = this.chartInner.patternify({
-			tag: 'g',
-			selector: 'layer-group',
-		})
-		const self = this
-		const dy = resize ? 0 : 35
-
-		this.pinsDom = layerGroup
-			.patternify({
-				tag: 'g',
-				selector: 'pin',
-				data: layer.map(d => {
-					const [x, y] = this.projection([d.Longitude, d.Latitude])
-					return {
-						...d,
-						x,
-						y
-					}
-				}),
-			})
-			.classed('highlighted', d => d.highlighted)
-			.attr('transform', d => {
-				return `translate(${d.x},${d.y})`
-			})
-			.sort((a, b) => {
-				return a.y - b.y;
-			})
-			.html(d => this.getPin(d))
-			.on('mouseover click', function (e, d) {
-				const pin = d3.select(this)
-
-				self.pinsDom.style('opacity', 0.5)
-
-				pin
-					.style('opacity', 1)
-					.selectAll('.pin-content')
-					.classed('transition-on', true)
-					.attr('transform', `scale(${1.5 / self.currentTransform.k})`)
-			})
-			.on('mouseout', function () {
-				const pin = d3.select(this)
-
-				self.pinsDom.style('opacity', 1)
-
-				const pinContent = pin
-					.selectAll('.pin-content')
-					.attr('transform', `scale(${1 / self.currentTransform.k})`)
-
-				setTimeout(() => {
-					pinContent.classed('transition-on', false)
-				}, 300)
-
-			})
-
-		// if (!resize) {
-		// 	this.pinsDom
-		// 		.transition()
-		// 		.delay((d, i) => {
-		// 			return i * 50 * Math.random()
-		// 		})
-		// 		.duration(350)
-		// 		.attr('transform', d => {
-		// 			return `translate(${d.x},${d.y})`
-		// 		})
-		// }
-
-		this.pinsDom.each(function (d) {
-			initTooltip(this, getTooltipHtml(d))
-		})
-
-		this.pinsDom.on('click', function (e, d) {
-			e.preventDefault()
-			e.stopPropagation()
-			onPinClick(d)
-		})
-	}
 
 	scale(scale) {
 		this.svg
@@ -242,10 +187,7 @@ class MercatorMap {
 	}
 
 	resetZoom() {
-		// const duration = this.currentTransform.k === d3.zoomIdentity.k ? 0 : 1000;
 		this.svg
-			// .transition()
-			// .duration(duration)
 			.call(this.zoom.transform, d3.zoomIdentity)
 	}
 
@@ -311,16 +253,18 @@ class MercatorMap {
 		this.resetZoom()
 	}
 
-	highlightPin(highlight) {
-		this.pinsDom.classed('highlighted', d => {
-			return d.highlighted = highlight(d)
-		}).each(function (d) {
-			if (d.highlighted) {
-				if (this._tippy) {
-					this._tippy.show()
-				}
-				d3.select(this).raise()
-			}
-		})
-	}
+	// highlightPin(highlight) {
+	// 	this.pindom.classed('highlighted', d => {
+	// 		return d.highlighted = highlight(d)
+	// 	}).each(function (d) {
+	// 		if (d.highlighted) {
+	// 			if (this._tippy) {
+	// 				this._tippy.show()
+	// 			}
+	// 			d3.select(this).raise()
+	// 		}
+	// 	})
+	// }
+
+
 }
