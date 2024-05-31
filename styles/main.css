@@ -60,11 +60,11 @@ body {
 
 .banner {
   background-image: url('/images/banner-mobile.png');
-  height: 334px;
   text-align: center;
   color: #fff;
   display: flex;
   align-items: center;
+  flex-direction: column;
 }
 
 .title {
@@ -78,7 +78,7 @@ body {
 
 .description {
   max-width: 300px;
-  margin: 40px auto;
+  margin: 20px auto;
   font-family: "GT Pressura";
   font-size: 16px;
   font-weight: 400;
