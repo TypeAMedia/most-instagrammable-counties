@@ -59,7 +59,7 @@ body {
 }
 
 .banner {
-  background-image: url('/images/banner-mobile.png');
+  background-image: url('../images/banner-mobile.png');
   text-align: center;
   color: #fff;
   display: flex;
@@ -711,7 +711,7 @@ body {
   }
 
   .banner {
-    background-image: url('/images/banner.png');
+    background-image: url('../images/banner.png');
     height: 280px;
     padding: 50px;
     text-align: center;
