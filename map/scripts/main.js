@@ -18,19 +18,17 @@ class App {
 
 	async loadDataAndInit() {
 		try {
-			const [mapjson, data, newData] = await Promise.all([
+			const [mapjson, newData] = await Promise.all([
 				d3.json('./data/uk-counties.json'),
-				d3.csv('./data/football-data.csv', d3.autoType),
 				d3.csv('./data/new-data.csv', d3.autoType)
 			])
 
 			this.data = newData
+
 			const newMapJson = {
 				type: "FeatureCollection",
 				features: mapjson.features.filter((d) => d.properties.NAME_2 !== 'Shetland Islands')
 			}
-
-			const regionObj = Array.from(new Set(newData.map((d) => d.Region)))
 
 			const headers = [
 				{
@@ -58,6 +56,9 @@ class App {
 					fieldValue: 'Town'
 				}
 			]
+			const regionObj = Array.from(new Set(newData.slice().map((d) => d.Region)))
+			console.log(regionObj)
+
 
 			const listOptions = d3.rollups(
 				newData,
@@ -88,7 +89,6 @@ class App {
 				list: listOptions,
 				id: '#city_select',
 				cb: county => {
-					console.log(county)
 					this.map.highlightTooltip(county)
 				},
 				searchEnabled: true,
@@ -100,15 +100,6 @@ class App {
 				data: this.data,
 				mapColors: ['#DA4D45', '#DA4D4580', '#324C3D80', '#324C3D'],
 				zoomExtent: this.zoomExtent,
-				layer: data.map((d, i) => {
-					const [Latitude, Longitude] = d.Coord.split(';').map(d => +d.trim())
-					return {
-						...d,
-						rank: d['Rank for beginners'],
-						Latitude,
-						Longitude,
-					}
-				}),
 				getTooltipHtml: d => {
 					return `<div class='tooltip-box'>
 					<div class='tooltip-title'> <span class='tooltip-span'> ${d?.County}</span>, ${d?.Region} </div>
@@ -192,9 +183,10 @@ class App {
 function drawTable(headers, data) {
 	const table = d3.select('#table')
 
-	const filteredData = data
-		.sort((a, b) => b['Total Instagram hashtags'] - a['Total Instagram hashtags'])
-		.filter((d, index) => index <= 8)
+	const filteredData = data.filter((d) => d.Rank !== null)
+		.sort((a, b) => a.Rank - b.Rank)
+		.filter((d, index) => index <= 9)
+
 
 	// Create headers
 	const header = table
