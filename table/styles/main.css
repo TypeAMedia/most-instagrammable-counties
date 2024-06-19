@@ -1,0 +1,622 @@
+:root {
+  --dark: #101921;
+}
+
+html,
+body {
+  font-family: "futura-pt", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  color: var(--dark);
+}
+
+@font-face {
+  font-family: "GT Pressura";
+  font-weight: 400;
+  src: url(./GT-PRESSURA-REGULAR.TTF) format("truetype");
+}
+
+@font-face {
+  font-weight: 700;
+  font-family: "GT Pressura-bold";
+  src: url(./GT-Pressura-Bold.ttf) format("truetype");
+}
+
+
+
+*:focus,
+*:focus-within {
+  box-shadow: none !important;
+}
+
+.font-normal {
+  font-weight: normal !important;
+}
+
+.text-grey {
+  color: #848484 !important;
+}
+
+.btn-close {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  padding: 0;
+}
+
+.btn-active:hover {
+  color: white;
+}
+
+.d-mobile {
+  display: block;
+}
+
+.d-desktop {
+  display: none;
+}
+
+.banner {
+  background-image: url('../images/banner-mobile.png');
+  text-align: center;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 70px 20px;
+}
+
+.title {
+  font-family: "GT Pressura";
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 44px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.description {
+  max-width: 350px;
+  margin: 20px auto;
+  font-family: "GT Pressura";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: center;
+
+}
+
+.main-container {
+  padding: 0px;
+  max-width: 918px;
+  background-color: #EEF1EF
+}
+
+.hero-image {
+  text-align: center;
+}
+
+.logo {
+  width: 100%;
+  text-align: center;
+  margin: 24px 0px;
+}
+
+
+.rank-text {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  fill: white;
+}
+
+.overall-ranking {
+  color: #DA4D45;
+  font-size: 24px;
+}
+
+/* inner content */
+
+.inner-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* table */
+
+.table-box {
+  text-align: center;
+}
+
+.table-title {
+  font-family: GT Pressura;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 40px;
+  color: #324C3D;
+  text-align: left;
+  margin: 0 20px;
+}
+
+
+/* Dropdown */
+.dropdown {
+  padding: 0 15px;
+  margin-top: 5px;
+  color: #324C3D;
+  font-family: GT Pressura;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 26px;
+  text-align: left;
+  max-width: 700px;
+}
+
+.sort-by {
+  margin-bottom: 5px;
+  font-family: "GT Pressura";
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 40px;
+  text-align: left;
+}
+
+.choice-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.choices__item--disabled {
+  display: none;
+}
+
+.choices__list--single .choices__item:before {
+  content: "";
+  background-repeat: no-repeat;
+  background-size: 29px 29px;
+  background-position: center;
+  width: 29px;
+  height: 29px;
+  position: absolute;
+  left: 11px;
+  top: 11px;
+}
+
+.choices__list--single {
+  padding: 10px;
+}
+
+.choices__list .choices__item--choice:before {
+  content: "";
+  background-repeat: no-repeat;
+  background-size: 29px 29px;
+  background-position: center;
+  width: 29px;
+  height: 29px;
+  position: absolute;
+  left: 11px;
+  top: 11px;
+}
+
+.choices {
+  margin-bottom: 0px;
+}
+
+.choices__inner {
+  background: #FFF;
+  border-radius: 4px;
+  /* box-shadow: 0px 4px 3px 0px rgba(53, 95, 118, 0.30), 0px 4px 20px 0px rgba(62, 105, 115, 0.20); */
+  border: none;
+  padding: 7.5px !important;
+  font-size: 16px;
+  font-style: normal;
+  font-family: GT Pressura;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 26px;
+  text-align: left;
+  /* text-transform: uppercase; */
+  line-height: normal;
+}
+
+.is-focused .choices__inner {
+  border: none;
+  border-radius: 4px;
+}
+
+.is-open .choices__inner {
+  border: none;
+  border-radius: 4px;
+  /* box-shadow: 0px 4px 3px 0px rgba(53, 95, 118, 0.30), 0px 4px 20px 0px rgba(62, 105, 115, 0.20); */
+}
+
+.choices__list--dropdown {
+  margin-top: 0px;
+  padding-top: 5px;
+  margin-top: 2px;
+  /* box-shadow: 0px 2px 2px 0px rgba(16, 25, 33, 0.30), 0px 4px 20px 0px rgba(16, 25, 33, 0.20) !important; */
+  border: none !important;
+  border-radius: 4px;
+}
+
+.choices__list--dropdown .choices__item {
+  font-style: normal;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+  padding: 10px 10px 10px 28px;
+}
+
+.choices__list--dropdown .choices__list {
+  max-height: 300px;
+}
+
+.is-highlighted,
+.is-selected {
+  background-color: #DA4D45 !important;
+  color: #fff !important
+}
+
+.choices[data-type*="select-one"]:after {
+  border-color: transparent;
+  border-width: 0px;
+  margin-top: 0px;
+  background-image: url(../images/arrow.svg);
+  background-repeat: no-repeat;
+  background-size: 18px 9px;
+  width: 19px;
+  height: 9px;
+  transform: translateY(-50%);
+  right: 16px;
+}
+
+.choices.is-open.is-focused:after {
+  border-color: transparent;
+  transform: rotate(180deg);
+  margin-top: -4px;
+}
+
+.choices__input {
+  border-bottom: 1px solid rgba(217, 217, 217, 0.50);
+}
+
+.choices__heading {
+  color: #848484;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  border: none;
+}
+
+/* End of dropdown */
+
+.pin {
+  cursor: pointer;
+}
+
+.pin path {
+  stroke-width: 2px;
+  stroke: transparent;
+}
+
+.pin.highlighted path {
+  fill: white;
+  stroke: black;
+}
+
+.pin.highlighted text {
+  fill: black;
+}
+
+.pin:hover path {
+  fill: white;
+  stroke: black;
+}
+
+.pin:hover text {
+  fill: black;
+}
+
+
+.btn-round.btn-active {
+  color: white;
+  background: #DA4D45;
+}
+
+.table-desc {
+  margin-top: 10px;
+}
+
+.table-desc-heading {
+  font-weight: 700
+}
+
+
+.table-div {
+  padding: 20px;
+}
+
+.table-wrap {
+  margin: 0 auto;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 16px 16px 10px 16px;
+  overflow-x: auto;
+  white-space: nowrap;
+  background-color: #ffffff;
+  width: 100%;
+  overflow-x: auto;
+}
+
+#table {
+  display: flex;
+  min-width: 500px;
+}
+
+.table-header {
+  border-right: 1px solid #EEF1EF
+}
+
+.table-label {
+  border-bottom: 1px solid #EEF1EF
+}
+
+.table-icon {
+  width: 20px;
+  height: 30px;
+}
+
+.Town_ {
+  border-right: none !important
+}
+
+.table-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  font-family: "Open Sans", sans-serif;
+  width: 100%;
+  cursor: pointer;
+}
+
+.table-cell {
+  font-family: "GT Pressura";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 40px;
+  text-align: left;
+
+}
+
+.table-label {
+  font-family: "GT Pressura";
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 40px;
+  text-align: center;
+  color: #324C3D
+}
+
+.table-container {
+  display: flex;
+  align-items: center;
+}
+
+.Rank {
+  font-family: "GT Pressura";
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 40px;
+  text-align: left;
+  color: #324C3D
+}
+
+.table th {
+  color: var(--dark);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px;
+  border-top: none;
+  border-bottom: 1px solid var(--dark) !important;
+}
+
+.table td {
+  color: #333;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+  border-bottom: 1px solid rgba(217, 217, 217, 0.50);
+}
+
+.table td:first-child {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  padding-left: 0;
+}
+
+.table th:first-child {
+  padding-left: 0;
+}
+
+/* End of modal */
+
+.tooltip-div {
+  padding: 8px;
+}
+
+.tooltip-div .tooltip-title {
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 32px;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.tooltip-div .icon {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+}
+
+.tooltip-div .field-Team {
+  font-weight: normal;
+}
+
+.tooltip-div .col-2 {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.tooltip-div .col-3 {
+  font-weight: bold;
+}
+
+.tooltip-title {
+  border-bottom: 1px solid #EEF1EF;
+  padding-bottom: 5px;
+}
+
+.tooltip-box {
+  background-color: #ffffff;
+  padding: 5px;
+  font-family: "GT Pressura";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  color: #324C3D
+}
+
+.tooltip-span {
+  font-family: "GT Pressura";
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 40px;
+  text-align: left;
+  color: #324C3D;
+}
+
+.tooltip-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  flex: 1 1 40%;
+  gap: 20px;
+}
+
+.tooltip-line-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: "GT Pressura";
+  font-size: 16px;
+  font-weight: 700;
+  text-align: left;
+
+}
+
+.tooltip-value {
+  text-align: end
+}
+
+.tooltip-rank {
+  margin-top: 20px;
+}
+
+.FC-rank {
+  color: #848484;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 38px;
+  display: flex;
+  align-items: start;
+  gap: 6px;
+}
+
+
+@media (min-width: 576px) {
+  .d-mobile {
+    display: none;
+  }
+
+  .modal-content {
+    /* padding: 16px; */
+    width: 80%
+  }
+
+  .d-desktop {
+    display: block !important;
+  }
+
+  .logo {
+    margin: 15px 0px 0px 40px;
+    text-align: left;
+    transform: translateY(18px);
+  }
+
+
+  .title {
+    font-family: "GT Pressura";
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 44px;
+    text-align: center;
+  }
+
+  .banner {
+    background-image: url('../images/banner.png');
+    height: 280px;
+    padding: 70px;
+    text-align: center;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .description {
+    max-width: 100%;
+    margin: 0 auto;
+    font-family: GT Pressura;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: center;
+  }
+
+  .table-title {
+    font-family: 'GT Pressura';
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 40px;
+    color: #324C3D
+  }
+
+  .modal-dialog {
+    max-width: 646px;
+  }
+
+  .dropdown {
+    padding: 0 3%;
+  }
+
+  .btn-zooms {
+    position: absolute;
+    right: -20px;
+    bottom: 30px;
+  }
+}
