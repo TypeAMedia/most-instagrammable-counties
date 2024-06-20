@@ -156,7 +156,7 @@ body {
 
 .sort-by {
   margin-bottom: 5px;
-  font-family: "GT Pressura";
+  font-family: "GT Pressura-bold";
   font-size: 16px;
   font-weight: 700;
   line-height: 40px;
@@ -208,7 +208,7 @@ body {
 .choices__inner {
   background: #FFF;
   border-radius: 4px;
-  /* box-shadow: 0px 4px 3px 0px rgba(53, 95, 118, 0.30), 0px 4px 20px 0px rgba(62, 105, 115, 0.20); */
+  box-shadow: 0px 4px 3px 0px rgba(70, 101, 117, 0.3), 0px 4px 20px 0px rgba(77, 107, 114, 0.2);
   border: none;
   padding: 7.5px !important;
   font-size: 16px;
@@ -218,7 +218,6 @@ body {
   font-weight: 400;
   line-height: 26px;
   text-align: left;
-  /* text-transform: uppercase; */
   line-height: normal;
 }
 
@@ -230,14 +229,14 @@ body {
 .is-open .choices__inner {
   border: none;
   border-radius: 4px;
-  /* box-shadow: 0px 4px 3px 0px rgba(53, 95, 118, 0.30), 0px 4px 20px 0px rgba(62, 105, 115, 0.20); */
+  box-shadow: 0px 4px 3px 0px rgba(53, 95, 118, 0.30), 0px 4px 20px 0px rgba(62, 105, 115, 0.20);
 }
 
 .choices__list--dropdown {
   margin-top: 0px;
   padding-top: 5px;
   margin-top: 2px;
-  /* box-shadow: 0px 2px 2px 0px rgba(16, 25, 33, 0.30), 0px 4px 20px 0px rgba(16, 25, 33, 0.20) !important; */
+  box-shadow: 0px 2px 2px 0px rgba(16, 25, 33, 0.30), 0px 4px 20px 0px rgba(16, 25, 33, 0.20) !important;
   border: none !important;
   border-radius: 4px;
 }
@@ -248,7 +247,7 @@ body {
   font-style: normal;
   font-weight: 400;
   line-height: 18px;
-  padding: 10px 10px 10px 28px;
+  padding: 10px 10px 10px 10px;
 }
 
 .choices__list--dropdown .choices__list {
@@ -293,39 +292,42 @@ body {
 }
 
 /* End of dropdown */
-
-.pin {
-  cursor: pointer;
+.countries {
+  text-align: left;
+  padding: 0px 0px 20px 0px;
 }
 
-.pin path {
-  stroke-width: 2px;
-  stroke: transparent;
+.country-box-title {
+  font-family: "GT Pressura-bold";
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 40px;
+  text-align: left;
+  color: #324C3D
 }
 
-.pin.highlighted path {
-  fill: white;
-  stroke: black;
+.country-boxes {
+  gap: 10px;
+  align-items: center;
 }
 
-.pin.highlighted text {
-  fill: black;
+.country-box {
+  border-radius: 20px;
+  border: none !important;
+  background-color: #324C3D;
+  color: #ffffff;
+  padding: 5px 13px;
+  font-family: "GT Pressura";
 }
 
-.pin:hover path {
-  fill: white;
-  stroke: black;
+.country-box:focus {
+  outline: none !important;
 }
 
-.pin:hover text {
-  fill: black;
+.country-box.active {
+  background-color: #DA4D45
 }
 
-
-.btn-round.btn-active {
-  color: white;
-  background: #DA4D45;
-}
 
 .table-desc {
   margin-top: 10px;
@@ -337,19 +339,13 @@ body {
 
 
 .table-div {
-  padding: 20px;
+  padding: 20px 0px 20px 10px;
 }
 
 .table-wrap {
   margin: 0 auto;
-  overflow-x: auto;
   overflow-y: hidden;
-  padding: 16px 16px 10px 16px;
-  overflow-x: auto;
   white-space: nowrap;
-  background-color: #ffffff;
-  width: 100%;
-  overflow-x: auto;
 }
 
 #table {
@@ -358,31 +354,31 @@ body {
 }
 
 .table-header {
-  border-right: 1px solid #EEF1EF
+  border-right: 1px solid #EEF1EF;
+}
+
+.table-header:last-child {
+  border-right: none !important
+}
+
+.header {
+  text-align: center;
 }
 
 .table-label {
-  border-bottom: 1px solid #EEF1EF
+  border-bottom: 1px solid #EEF1EF;
+
 }
 
 .table-icon {
-  width: 20px;
-  height: 30px;
+  width: 25px;
+  height: 35px;
 }
 
 .Town_ {
   border-right: none !important
 }
 
-.table-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 40px;
-  font-family: "Open Sans", sans-serif;
-  width: 100%;
-  cursor: pointer;
-}
 
 .table-cell {
   font-family: "GT Pressura";
@@ -394,21 +390,32 @@ body {
 }
 
 .table-label {
-  font-family: "GT Pressura";
+  font-family: "GT Pressura-bold";
   font-size: 16px;
   font-weight: 700;
   line-height: 40px;
-  text-align: center;
   color: #324C3D
+}
+
+.table-row {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  font-family: "GT Pressura";
+  width: 100%;
+  cursor: pointer;
+  padding: 10px 5px 10px 10px;
 }
 
 .table-container {
   display: flex;
   align-items: center;
+  background-color: #ffffff;
+  padding: 16px 16px 10px 10px;
 }
 
 .Rank {
-  font-family: "GT Pressura";
+  font-family: "GT Pressura-bold";
   font-size: 16px;
   font-weight: 700;
   line-height: 40px;
@@ -446,106 +453,38 @@ body {
   padding-left: 0;
 }
 
-/* End of modal */
-
-.tooltip-div {
-  padding: 8px;
-}
-
-.tooltip-div .tooltip-title {
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 32px;
-  text-transform: uppercase;
-  margin-bottom: 2px;
-}
-
-.tooltip-div .icon {
-  width: 26px;
-  height: 26px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 12px;
-}
-
-.tooltip-div .field-Team {
-  font-weight: normal;
-}
-
-.tooltip-div .col-2 {
-  font-weight: bold;
-  font-size: 16px;
-}
-
-.tooltip-div .col-3 {
-  font-weight: bold;
-}
-
-.tooltip-title {
-  border-bottom: 1px solid #EEF1EF;
-  padding-bottom: 5px;
-}
-
-.tooltip-box {
-  background-color: #ffffff;
-  padding: 5px;
-  font-family: "GT Pressura";
+.place {
+  font-family: "GT Pressura-bold";
   font-size: 16px;
   font-weight: 400;
-  line-height: 24px;
-  text-align: left;
+  line-height: 16px;
   color: #324C3D
 }
 
-.tooltip-span {
-  font-family: "GT Pressura";
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 40px;
-  text-align: left;
-  color: #324C3D;
-}
-
-.tooltip-line {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  flex: 1 1 40%;
-  gap: 20px;
-}
-
-.tooltip-line-title {
-  display: flex;
-  align-items: center;
-  gap: 6px;
+.county {
   font-family: "GT Pressura";
   font-size: 16px;
+  font-weight: 400;
+  line-height: 16px;
+  margin-top: 7px;
+}
+
+.show-more {
+  background-color: #324C3D;
+  padding: 15px 100px;
+  border-radius: 6px;
+  color: #ffffff;
+  text-align: center;
+  font-family: 'GT Pressura';
+  font-size: 18px;
   font-weight: 700;
-  text-align: left;
-
+  cursor: pointer;
+  margin-top: 5px;
+  margin-right: 10px !important
 }
 
-.tooltip-value {
-  text-align: end
-}
 
-.tooltip-rank {
-  margin-top: 20px;
-}
 
-.FC-rank {
-  color: #848484;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 38px;
-  display: flex;
-  align-items: start;
-  gap: 6px;
-}
 
 
 @media (min-width: 576px) {
@@ -606,17 +545,26 @@ body {
     color: #324C3D
   }
 
-  .modal-dialog {
-    max-width: 646px;
+  .table-row {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    font-family: "GT Pressura";
+    width: 100%;
+    cursor: pointer;
+    padding: 20px 10px 20px 20px;
+  }
+
+  .table-div {
+    padding: 20px
   }
 
   .dropdown {
     padding: 0 3%;
   }
 
-  .btn-zooms {
-    position: absolute;
-    right: -20px;
-    bottom: 30px;
+  .show-more {
+    margin-right: 0px !important
   }
+
 }

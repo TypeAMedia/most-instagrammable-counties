@@ -31,48 +31,32 @@
         </select>
       </div>
 
+
       <div class="content">
 
       </div>
       <div class="table-box">
+
       </div>
 
       <div class="table-div">
         <div class="table-wrap">
+          <div class="countries">
+            <div class="country-box-title"> Country</div>
+            <div class="country-boxes">
+              <button class="country-box active" data-target="all"> All </button>
+              <button class="country-box" data-target="England"> England </button>
+              <button class="country-box" data-target="Scotland"> Scotland </button>
+              <button class="country-box" data-target="Wales"> Wales </button>
+              <button class="country-box" data-target="Northern Ireland"> N. Ireland </button>
+            </div>
+          </div>
           <table class="table-container" id="table">
           </table>
         </div>
-
+        <div class="show-more" id="show_more">Show more</div>
       </div>
-    </div>
-  </div>
 
-  <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content position-relative" id="modal_content">
-        <button type="button" class="btn btn-close" data-toggle="modal" data-target="#modal" aria-label="Close">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-            <path
-              d="M17.0451 2.08512L15.9151 0.955139L9.00025 7.87002L2.08537 0.955139L0.955383 2.08512L7.87026 9L0.955383 15.9149L2.08537 17.0449L9.00025 10.13L15.9151 17.0449L17.0451 15.9149L10.1302 9L17.0451 2.08512Z"
-              fill="#333333" />
-          </svg>
-        </button>
-
-        <div class="modal-heading">
-          <h5 class="modal-title">
-            Rank per factor
-          </h5>
-          <div>
-            <button class="btn btn-round rank-btn btn-active" data-target="overall">Overall</button>
-            <button class="btn btn-round rank-btn" data-target="miles">Total distance</button>
-            <button class="btn btn-round rank-btn" data-target="fuel_cost">Fuel cost</button>
-            <button class="btn btn-round rank-btn" data-target="parking_cost">Parking cost</button>
-            <button class="btn btn-round rank-btn" data-target="parking_space">Parking spaces</button>
-          </div>
-        </div>
-
-
-      </div>
     </div>
   </div>
   </div>
@@ -89,7 +73,6 @@
   <script src="./libs/js/topojson-client.min.js"></script>
 
   <script src="./scripts/utils.js"></script>
-  <script src="./scripts/MercatorMap.js"></script>
   <script src="./scripts/main.js"></script>
 </body>
 
