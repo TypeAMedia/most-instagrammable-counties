@@ -1,8 +1,6 @@
 class App {
 	constructor() {
 		this.sortType = 'Towns and villages'
-		this.showMore = false;
-		this.tableData = []
 		this.attr = 'all'
 		this.loadDataAndInit()
 	}
@@ -73,23 +71,25 @@ class App {
 				}
 			]
 
-			this.tableData = countrysideData
+			let length = 10
 
 			// Initial table
-			drawTable(headers, this.tableData, this.attr || 'all', this.sortType || 'Towns and villages')
+			drawTable(headers, countrysideData, this.attr || 'all', this.sortType || 'Towns and villages')
 
 			// Handle show more button
 			d3.select('#show_more')
-				.on('click', function () {
-					this.showMore = !this.showMore
-					if (this.showMore) {
-						d3.select(this).html('Show less')
-						this.tableData = countrysideData
+				.on('click', function (e) {
+					if (length < countrysideData.length) {
+						d3.select(e.target).html('Show more')
+						length = length + 10
 					} else {
-						d3.select(this).html('Show more')
-						this.tableData = countrysideData.slice(0, 10)
+						if (length === countrysideData.length) {
+							d3.select(e.target).html('Show less')
+							length = length - 10
+						}
 					}
-					drawTable(headers, this.tableData, this.attr || 'all', this.sortType || 'Towns and villages')
+
+					drawTable(headers, countrysideData, this.attr || 'all', this.sortType || 'Towns and villages')
 				})
 
 			//Handle dropdown
@@ -97,19 +97,85 @@ class App {
 				list: list,
 				id: '#city_select',
 				cb: type => {
+					length = 10
 					this.sortType = type
-					drawTable(headers, this.tableData, this.attr || 'all', type)
+					drawTable(headers, countrysideData, this.attr || 'all', type)
 				},
 			})
 
 			// Handle country boxes 
 			const countryBoxes = d3.selectAll('.country-box')
 			countryBoxes.on('click', (e) => {
+				length = 10
 				countryBoxes.classed('active', false)
 				d3.select(e.target).classed('active', true)
 				this.attr = d3.select(e.target).attr('data-target')
-				drawTable(headers, this.tableData, this.attr, this.sortType)
+				drawTable(headers, countrysideData, this.attr, this.sortType)
 			})
+
+			// Draw Table
+			function drawTable(headers, data, country, type) {
+				const table = d3.select('#table')
+				const filteredData = data
+					.filter((d) => {
+						if (country === 'all') {
+							return true;
+						} else {
+							return d.Country === country
+						}
+					})
+					.filter((d) => d.Type === type)
+					.slice(0, length)
+					.sort((a, b) => b['Number of instagram hashtags'] - a['Number of instagram hashtags'])
+					.map((d, index) => {
+						return {
+							...d,
+							Rank: index + 1
+						}
+					})
+
+				// Create headers
+				const header = table
+					.selectAll('div.table-header')
+					.data(headers)
+					.join('div')
+					.attr('class', (d, index) => `table-header ${d.label}_`)
+					.style('flex', (d) => `2 2 ${d.width}`)
+					.style('text-align', 'center')
+					.html(d => `
+					<div class='header'>
+						<img class='table-icon' src='${d.icon}'/>
+						<div class='table-label'> ${d.label} </div>
+						</div>
+					`)
+
+				header.each(function (headerData) {
+					const header = d3.select(this)
+					const tableRows = header
+						.selectAll('.table-row')
+						.data(filteredData)
+						.join('div')
+						.attr('class', 'table-row')
+
+					tableRows
+						.selectAll('.table-cell')
+						.data(d => [d[headerData.fieldValue]])
+						.join('div')
+						.attr('class', `table-cell ${headerData.fieldValue}`)
+						.html(d => {
+							if (headerData.fieldValue === 'Number of instagram hashtags') {
+								return formatThousand(d)
+							} else if (headerData.fieldValue === 'Rank') {
+								return `${d}${get_ordinal_suffix(d)}`
+							} else if (headerData.fieldValue === 'Name of location') {
+								const place = filteredData.find((x) => x['Name of location'] === d)
+								return `
+								<div class='place'> <div>${d} </div> <div class='county'> ${place.County},  ${place.Country} </div> </div> `
+							}
+							else return d
+						})
+				})
+			}
 
 		} catch (e) {
 			console.error(e)
@@ -117,71 +183,7 @@ class App {
 	}
 }
 
-// Draw Table
-function drawTable(headers, data, country, type) {
-	const table = d3.select('#table')
 
-	const filteredData = data
-		.filter((d) => {
-			if (country === 'all') {
-				return true;
-			} else {
-				return d.Country === country
-			}
-		})
-		.filter((d) => d.Type === type)
-		.slice(0, 10)
-		.sort((a, b) => b['Number of instagram hashtags'] - a['Number of instagram hashtags'])
-		.map((d, index) => {
-			return {
-				...d,
-				Rank: index + 1
-			}
-		})
-	console.log(filteredData)
-
-	// Create headers
-	const header = table
-		.selectAll('div.table-header')
-		.data(headers)
-		.join('div')
-		.attr('class', (d, index) => `table-header ${d.label}_`)
-		.style('flex', (d) => `2 2 ${d.width}`)
-		.style('text-align', 'center')
-		.html(d => `
-		<div class='header'>
-			<img class='table-icon' src='${d.icon}'/>
-			<div class='table-label'> ${d.label} </div>
-			</div>
-		`)
-
-	header.each(function (headerData) {
-		const header = d3.select(this)
-		const tableRows = header
-			.selectAll('.table-row')
-			.data(filteredData)
-			.join('div')
-			.attr('class', 'table-row')
-
-		tableRows
-			.selectAll('.table-cell')
-			.data(d => [d[headerData.fieldValue]])
-			.join('div')
-			.attr('class', `table-cell ${headerData.fieldValue}`)
-			.html(d => {
-				if (headerData.fieldValue === 'Number of instagram hashtags') {
-					return formatThousand(d)
-				} else if (headerData.fieldValue === 'Rank') {
-					return `${d}${get_ordinal_suffix(d)}`
-				} else if (headerData.fieldValue === 'Name of location') {
-					const place = filteredData.find((x) => x['Name of location'] === d)
-					return `
-					<div class='place'> <div>${d} </div> <div class='county'> ${place.County},  ${place.Country} </div> </div> `
-				}
-				else return d
-			})
-	})
-}
 
 document.addEventListener('DOMContentLoaded', () => {
 	new App()
