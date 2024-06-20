@@ -170,7 +170,7 @@ class App {
 							} else if (headerData.fieldValue === 'Name of location') {
 								const place = filteredData.find((x) => x['Name of location'] === d)
 								return `
-								<div class='place'> <div>${d} </div> <div class='county'> ${place.County},  ${place.Country} </div> </div> `
+								<div class='place'> <div>${d} </div> <div class='county'> ${place.County ? `${place.County},` : ''}  ${place.Country} </div> </div> `
 							}
 							else return d
 						})
