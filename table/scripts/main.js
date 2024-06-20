@@ -76,22 +76,6 @@ class App {
 			// Initial table
 			drawTable(headers, countrysideData, this.attr || 'all', this.sortType || 'Towns and villages')
 
-			// Handle show more button
-			d3.select('#show_more')
-				.on('click', function (e) {
-					if (length < countrysideData.length) {
-						d3.select(e.target).html('Show more')
-						length = length + 10
-					} else {
-						if (length === countrysideData.length) {
-							d3.select(e.target).html('Show less')
-							length = length - 10
-						}
-					}
-
-					drawTable(headers, countrysideData, this.attr || 'all', this.sortType || 'Towns and villages')
-				})
-
 			//Handle dropdown
 			this.choice = initDropdown({
 				list: list,
@@ -112,6 +96,25 @@ class App {
 				this.attr = d3.select(e.target).attr('data-target')
 				drawTable(headers, countrysideData, this.attr, this.sortType)
 			})
+
+			// Handle show more button
+			d3.select('#show_more')
+				.on('click', (e) => {
+					if (length < countrysideData.length) {
+						d3.select(e.target).html('Show more')
+						length = length + 10
+					} else {
+						if (length === countrysideData.length) {
+							d3.select(e.target).html('Show less')
+							length = length - 10
+						}
+					}
+
+					drawTable(headers, countrysideData, this.attr || 'all', this.sortType || 'Towns and villages')
+				})
+
+
+
 
 			// Draw Table
 			function drawTable(headers, data, country, type) {
