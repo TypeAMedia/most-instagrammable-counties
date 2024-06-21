@@ -1,6 +1,6 @@
 class App {
 	constructor() {
-		this.sortType = 'Towns and villages'
+		this.sortType = 'Towns and Villages'
 		this.attr = 'all'
 		this.loadDataAndInit()
 	}
@@ -46,27 +46,27 @@ class App {
 			const list = [
 				{
 					label: `<div> <img src=${'./images/town.svg'} <div> Towns and Villages </div> </div>`,
-					value: 'Towns and villages',
+					value: 'Towns and Villages',
 					icon: './images/town.svg'
 				},
 				{
 					label: `<div> <img src=${'./images/estates.svg'} <div> Country Estates </div> </div>`,
-					value: 'Country estates',
+					value: 'Country Estates',
 					icon: './images/estates/.svg'
 				},
 				{
-					label: `<div> <img src=${'./images/greatTrail.svg'} <div> Great Trail </div> </div>`,
+					label: `<div> <img src=${'./images/greatTrail.svg'} <div> Great Trails </div> </div>`,
 					value: 'Great Trails',
 					icon: './images/greatTrail.svg'
 				},
 				{
 					label: `<div> <img src=${'./images/castles.svg'} <div> Historic Castles </div> </div>`,
-					value: 'Castles',
+					value: 'Historic Castles',
 					icon: './images/castles.svg'
 				},
 				{
 					label: `<div> <img src=${'./images/reserves.svg'} <div> Nature Reserves </div> </div>`,
-					value: 'Nature reserves',
+					value: 'Nature Reserves',
 					icon: './images/reserves.svg'
 				}
 			]
@@ -74,7 +74,7 @@ class App {
 			let length = 10
 
 			// Initial table
-			drawTable(headers, countrysideData, this.attr || 'all', this.sortType || 'Towns and villages')
+			drawTable(headers, countrysideData, this.attr || 'all', this.sortType || 'Towns and Villages')
 
 			//Handle dropdown
 			this.choice = initDropdown({
@@ -110,10 +110,8 @@ class App {
 						}
 					}
 
-					drawTable(headers, countrysideData, this.attr || 'all', this.sortType || 'Towns and villages')
+					drawTable(headers, countrysideData, this.attr || 'all', this.sortType || 'Towns and Villages')
 				})
-
-
 
 
 			// Draw Table
