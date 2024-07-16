@@ -138,7 +138,7 @@ class App {
 				}
 			})
 
-			drawTable(headers, newData),
+			drawTable(headers, newData.slice().sort((a, b) => b['Total Instagram hashtags'] - a['Total Instagram hashtags'])),
 				this.initZoomBtns()
 		} catch (e) {
 			console.error(e)
@@ -184,7 +184,7 @@ function drawTable(headers, data) {
 	const table = d3.select('#table')
 
 	const filteredData = data.filter((d) => d.Rank !== null)
-		.sort((a, b) => a.Rank - b.Rank)
+		.sort((a, b) => b['Total Instagram hashtags'] - a['Total Instagram hashtags'])
 		.filter((d, index) => index <= 9)
 
 
