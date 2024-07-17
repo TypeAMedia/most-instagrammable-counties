@@ -110,7 +110,7 @@ class App {
 					<img src='./images/rank.svg' />
 					<div> Rank </div>
 					</div>
-					${d?.Rank}${get_ordinal_suffix(d)}
+					${d?.Rank}${get_ordinal_suffix(d?.Rank)}
 					</div> 
 
 
